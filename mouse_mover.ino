@@ -11,6 +11,15 @@ Servo myservo;
 // Define the servo pin:
 #define servoPin 9
 
+// Define the max angle to shift through
+#define maxAngle 10
+
+// Define the gentleness with which to move the motor, higher == gentler
+#define gentleness 100
+
+//Define delay between movements
+#define delayTime 10000
+
 // Create a variable to store the servo position:
 int angle = 0;
 
@@ -20,9 +29,19 @@ void setup() {
 }
 
 void loop() {
-  // Tell the servo to go to a particular angle:
-  myservo.write(10);
-  delay(1000);
-  myservo.write(0);
-  delay(1000);
+  int i;
+  // foward sweep
+  for (i =0; i <= maxAngle; i++) { 
+    myservo.write(i);
+    delay(gentleness);
+  }
+  // wait
+  delay(delayTime);
+
+  // backward sweep
+  for (i =maxAngle; i <=0  ; i--) { 
+    myservo.write(i);
+    delay(gentleness);
+  }
+  delay(delayTime);
 }
