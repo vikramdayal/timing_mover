@@ -14,8 +14,8 @@ Servo myservo;
 // Define the max angle to shift through
 #define maxAngle 10
 
-// Define the gentleness with which to move the motor, higher == gentler
-#define gentleness 100
+// Define the smoothness with which to move the motor, higher == gentler
+#define smoothness 100
 
 //Define delay between movements
 #define delayTime 10000
@@ -33,15 +33,15 @@ void loop() {
   // foward sweep
   for (i =0; i <= maxAngle; i++) { 
     myservo.write(i);
-    delay(gentleness);
+    delay(smoothness);
   }
   // wait
-  delay(delayTime);
+  delay(delayTime/100);
 
   // backward sweep
-  for (i =maxAngle; i <=0  ; i--) { 
+  for (i =maxAngle; i >= 0  ; i--) { 
     myservo.write(i);
-    delay(gentleness);
+    delay(smoothness);
   }
   delay(delayTime);
 }
